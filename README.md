@@ -145,3 +145,4 @@ You can also run any pending migrations manually, without starting the server vi
 - Make sure your package manager is up to date.
 - **Not recommended**: if none of the above helps to resolve the issue, install sharp specifying your machines OS and Architecture. For example: `pnpm install sharp --config.platform=linux --config.architecture=x64` or `npm install sharp --os linux --cpu x64`
 
+# pos-server
