@@ -3,3 +3,15 @@ dist
 admin-ui
 static/assets
 static/email/test-emails
+
+# secrets and local DB — must NOT be committed
+.env
+.env.local
+*.sqlite
+*.sqlite-journal
+
+# editor / tool state
+.claude/
+.qodo/
+.vscode/
+.idea/

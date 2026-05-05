@@ -10,6 +10,7 @@ import { PharmaResolver } from './api/pharma.resolver';
 import { pharmaApiExtensions } from './api/pharma.api';
 
 @VendurePlugin({
+    compatibility: '^3.0.0',
     imports: [PluginCommonModule],
     entities: [PharmaItem, PharmaPurchase, PharmaPayment, PharmaReceipt, PharmaToken, PharmaSale],
     providers: [PharmaService],

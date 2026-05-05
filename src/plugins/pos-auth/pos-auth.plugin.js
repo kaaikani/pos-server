@@ -5,6 +5,7 @@ import { PosAuthResolver } from './api/pos-auth.resolver';
 import { posAuthApiExtensions } from './api/pos-auth.api';
 
 @VendurePlugin({
+    compatibility: '^3.0.0',
     imports: [PluginCommonModule],
     entities: [PosUser],
     providers: [PosAuthService],

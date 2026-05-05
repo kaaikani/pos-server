@@ -95,10 +95,9 @@ export const config: VendureConfig = {
         AssetServerPlugin.init({
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
-            // For local dev, the correct value for assetUrlPrefix should
-            // be guessed correctly, but for production it will usually need
-            // to be set manually to match your production url.
-            assetUrlPrefix: IS_DEV ? undefined : 'https://www.my-shop.com/assets/',
+            // In dev, let Vendure auto-detect the prefix. In production set
+            // ASSET_URL_PREFIX to your CDN/public host (e.g. https://cdn.example.com/assets/).
+            assetUrlPrefix: IS_DEV ? undefined : process.env.ASSET_URL_PREFIX,
         }),
         DefaultSchedulerPlugin.init(),
         DefaultJobQueuePlugin.init({ useDatabaseForBuffer: true }),
@@ -109,14 +108,15 @@ export const config: VendureConfig = {
             route: 'mailbox',
             handlers: defaultEmailHandlers,
             templateLoader: new FileBasedTemplateLoader(path.join(__dirname, '../static/email/templates')),
-            globalTemplateVars: {
-                // The following variables will change depending on your storefront implementation.
-                // Here we are assuming a storefront running at http://localhost:8080.
-                fromAddress: '"example" <noreply@example.com>',
-                verifyEmailAddressUrl: 'http://localhost:8080/verify',
-                passwordResetUrl: 'http://localhost:8080/password-reset',
-                changeEmailAddressUrl: 'http://localhost:8080/verify-email-address-change'
-            },
+            globalTemplateVars: (() => {
+                const storefrontUrl = process.env.STOREFRONT_URL || 'http://localhost:3002';
+                return {
+                    fromAddress: process.env.EMAIL_FROM_ADDRESS || '"example" <noreply@example.com>',
+                    verifyEmailAddressUrl: `${storefrontUrl}/verify`,
+                    passwordResetUrl: `${storefrontUrl}/password-reset`,
+                    changeEmailAddressUrl: `${storefrontUrl}/verify-email-address-change`,
+                };
+            })(),
         }),
         DashboardPlugin.init({
             route: 'dashboard',

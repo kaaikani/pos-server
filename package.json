@@ -11,7 +11,10 @@
     "build:dashboard": "vite build",
     "start:server": "node ./dist/index.js",
     "start:worker": "node ./dist/index-worker.js",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "migration:generate": "ts-node ./node_modules/@vendure/core/cli/migrate.js generate",
+    "migration:run": "ts-node ./node_modules/@vendure/core/cli/migrate.js run",
+    "migration:revert": "ts-node ./node_modules/@vendure/core/cli/migrate.js revert"
   },
   "dependencies": {
     "@vendure/asset-server-plugin": "3.5.5",
@@ -19,8 +22,10 @@
     "@vendure/dashboard": "3.5.5",
     "@vendure/email-plugin": "3.5.5",
     "@vendure/graphiql-plugin": "3.5.5",
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "12.8.0",
-    "dotenv": "17.3.1"
+    "dotenv": "17.3.1",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
     "@vendure/cli": "3.5.5",

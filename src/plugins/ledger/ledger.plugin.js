@@ -6,6 +6,7 @@ import { LedgerAdminResolver } from './api/ledger.resolver';
 import { ledgerApiExtensions } from './api/ledger.api';
 
 @VendurePlugin({
+    compatibility: '^3.0.0',
     imports: [PluginCommonModule],
     entities: [Ledger, LedgerPayment],
     providers: [LedgerService],
