@@ -5,6 +5,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     base: '/dashboard',
+    server: {
+        port: 5273, // was Vite default 5173 — moved out of Windows reserved range 5131–5230
+        strictPort: true, // fail loudly if 5273 is taken, instead of silently hopping to another (maybe-reserved) port
+    },
     build: {
         outDir: join(__dirname, 'dist/dashboard'),
     },

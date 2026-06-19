@@ -1,5 +1,5 @@
 import { bootstrapWorker } from '@vendure/core';
-import { config } from './vendure-config';
+import { config } from './vendure-config.ts';
 
 bootstrapWorker(config)
     .then(worker => worker.startJobQueue())

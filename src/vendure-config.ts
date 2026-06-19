@@ -61,15 +61,25 @@ export const config: VendureConfig = {
           secret: process.env.COOKIE_SECRET,
         },
     },
-    dbConnectionOptions: {
-        type: 'better-sqlite3',
-        // See the README.md "Migrations" section for an explanation of
-        // the `synchronize` and `migrations` options.
-        synchronize: IS_DEV,
-        migrations: [path.join(__dirname, './migrations/*.+(js|ts)')],
-        logging: false,
-        database: path.join(__dirname, '../vendure.sqlite'),
-    },
+dbConnectionOptions: {
+    type: 'mysql',
+
+    host: process.env.DB_HOST || 'localhost',
+    port: +(process.env.DB_PORT || 3306),
+    username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || '123456',
+
+    database: process.env.DB_NAME || 'wow_vendurepos',
+
+    // synchronize=true auto-modifies the DB schema to match entity definitions.
+    // SAFE in dev (rapid iteration), DESTRUCTIVE in prod (dropped columns lose data).
+    // Production deploys MUST run `npm run migration:generate <Name>` for any
+    // entity change and `npm run migration:run` to apply.
+    synchronize: IS_DEV,
+    migrations: [path.join(__dirname, './migrations/*.+(js|ts)')],
+    migrationsRun: !IS_DEV,
+    logging: false,
+},
     paymentOptions: {
         paymentMethodHandlers: [dummyPaymentHandler],
     },

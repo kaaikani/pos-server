@@ -14,8 +14,7 @@
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": false,
-    "outDir": "./dist",
-    "baseUrl": "./"
+    "outDir": "./dist"
   },
   "include": ["src/**/*.js", "src/**/*.ts"],
   "exclude": [

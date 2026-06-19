@@ -9,6 +9,8 @@ static/email/test-emails
 .env.local
 *.sqlite
 *.sqlite-journal
+*.cookies.txt
+_requirements_extracted.txt
 
 # editor / tool state
 .claude/
